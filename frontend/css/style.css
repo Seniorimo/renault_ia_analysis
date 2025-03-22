@@ -1,0 +1,573 @@
+/* Style principal pour l'application Renault ZOE IA Analysis */
+
+:root {
+    --primary-color: #3b82f6; /* Bleu */
+    --secondary-color: #10b981; /* Vert */
+    --warning-color: #f59e0b; /* Orange */
+    --danger-color: #ef4444; /* Rouge */
+    --text-color: #334155; /* Gris foncé */
+    --text-light: #94a3b8; /* Gris clair */
+    --background-color: #f1f5f9; /* Gris très clair */
+    --card-bg: #ffffff; /* Blanc */
+    --border-color: #e2e8f0; /* Gris clair pour bordures */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* En-tête */
+header {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 32px;
+    margin-right: 0.75rem;
+}
+
+.logo h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.status-item span {
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.status-indicator {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-indicator.connected {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--secondary-color);
+}
+
+.status-indicator.disconnected,
+.status-indicator.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.status-indicator.running {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--secondary-color);
+}
+
+.status-indicator.stopped {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+/* Grille principale */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Carte (Card) */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+/* Visualisation 3D */
+.visualization-container {
+    height: 300px;
+    position: relative;
+    border-radius: 0.375rem;
+    background-color: #1e293b; /* Fond sombre pour le modèle 3D */
+    overflow: hidden;
+}
+
+#vehicle-model {
+    width: 100%;
+    height: 100%;
+}
+
+.real-time-info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.real-time-info .info-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.real-time-info .label {
+    opacity: 0.8;
+}
+
+.real-time-info .value {
+    font-weight: 600;
+}
+
+/* Contrôles du véhicule */
+.controls-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.control-group {
+    margin-bottom: 1.25rem;
+}
+
+.control-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.control-label .label {
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.control-label .value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.slider-container {
+    position: relative;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 9999px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 9999px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.button-primary:hover {
+    background-color: #2563eb;
+}
+
+.button-primary:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+}
+
+.button-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.button-danger:hover {
+    background-color: #dc2626;
+}
+
+.button-danger:disabled {
+    background-color: #fca5a5;
+    cursor: not-allowed;
+}
+
+/* Jauges et graphiques */
+.gauges-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.gauge-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gauge-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gauge-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.gauge-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.gauge-bar {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease-in-out;
+}
+
+.gauge-fill.speed {
+    background-color: var(--primary-color);
+}
+
+.gauge-fill.battery {
+    background-color: var(--secondary-color);
+}
+
+.gauge-fill.motor-temp {
+    background-color: var(--danger-color);
+}
+
+.gauge-fill.brake-temp {
+    background-color: var(--warning-color);
+}
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    margin-bottom: 1.5rem;
+}
+
+/* Analyse IA */
+.ai-analysis-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.analysis-item {
+    padding: 1rem;
+    background-color: rgba(241, 245, 249, 0.5);
+    border-radius: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.analysis-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.analysis-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.score {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 700;
+}
+
+.score.good {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--secondary-color);
+}
+
+.score.medium {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.score.bad {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Pied de page */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Utilitaires */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles de notification pour les erreurs */
+.notification {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transform: translateY(-10px);
+    opacity: 0;
+    max-width: 320px;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification.error {
+    border-left: 4px solid var(--danger-color);
+}
+
+.notification.success {
+    border-left: 4px solid var(--secondary-color);
+}
+
+.notification.warning {
+    border-left: 4px solid var(--warning-color);
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.notification-message {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.notification-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+/* Styles pour écrans plus petits */
+@media (max-width: 768px) {
+    .main-grid,
+    .gauges-container,
+    .controls-container,
+    .ai-analysis-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.75rem;
+    }
+} 

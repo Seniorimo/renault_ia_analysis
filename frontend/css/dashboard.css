@@ -1,0 +1,77 @@
+.diagnostic-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+
+.diagnostic-chart {
+    height: 300px;
+    margin-bottom: 1.5rem;
+    background-color: var(--light-blue);
+    border-radius: 4px;
+}
+
+.system-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 4px solid var(--renault-blue);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.error-log {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+}
+
+.meter-container {
+    position: relative;
+    height: 120px;
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.component-status {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    background-color: var(--light-blue);
+}
+
+.diagnostic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.diagnostic-table th,
+.diagnostic-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.diagnostic-table th {
+    background: var(--light-blue);
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+
+.diagnostic-table tr:hover {
+    background-color: #f8f9fa;
+} 
